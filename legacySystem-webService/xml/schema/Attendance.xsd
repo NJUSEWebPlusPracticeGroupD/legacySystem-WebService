@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/attendance"
+        xmlns:tns = "http://www.oldCompany.com/attendance"
+        xmlns:erp = "http://www.oldCompany.com/erp"
+        elementFormDefault="qualified">
+
+    <element name="getAllGroupScheduleParam" type="string" fixed="getAllGroupSchedules">
+
+    </element>
+
+    <element name="getAllShiftsParam" type="string" fixed="getAllShifts">
+
+    </element>
+
+    <element name="GroupSchedulingInformation" type="tns:GroupScheduleInformationType">
+
+    </element>
+
+    <element name="getGroupScheduleParam" type="tns:getGroupScheduleInformationParamType">
+
+    </element>
+
+
+    <element name="GroupScheduleInformationList" >
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="GroupScheduleInformation" type="tns:GroupScheduleInformationType"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="shiftList" >
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="shift" type="tns:ShiftType"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="GroupScheduleInformationType">
+        <sequence>
+            <element name="GroupInformation" type="erp:GroupInformationType"/>
+            <element name="Shift" type="tns:ShiftType"/>
+            <element name="DaysOfWeek" type="tns:DaysOfWeekType"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getGroupScheduleInformationParamType">
+        <sequence>
+            <element name="groupId" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ShiftType">
+        <sequence>
+            <element name="shiftKind" type="tns:ShiftKindType"/>
+            <element name="shiftTime" type="tns:ShiftTimeType"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ShiftTimeType">
+        <sequence>
+            <element name="startTime" type="date"/>
+            <element name="endTime" type="date"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="ShiftKindType">
+        <restriction base="string">
+            <enumeration value="早班"/>
+            <enumeration value="晚班"/>
+            <enumeration value="全天"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="DaysOfWeekType">
+        <sequence>
+            <element name="startDay" type="tns:WeekDayType"/>
+            <element name="endDay" type="tns:WeekDayType"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="WeekDayType">
+        <restriction base="string">
+            <enumeration value="星期一"/>
+            <enumeration value="星期二"/>
+            <enumeration value="星期三"/>
+            <enumeration value="星期四"/>
+            <enumeration value="星期五"/>
+            <enumeration value="星期六"/>
+            <enumeration value="星期日"/>
+        </restriction>
+    </simpleType>
+
+
+
+</schema>

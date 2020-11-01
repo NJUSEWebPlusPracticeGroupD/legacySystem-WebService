@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/order"
+        xmlns:tns = "http://www.oldCompany.com/order"
+        elementFormDefault="qualified">
+
+
+    <element name="getAllOrdersParam" type="string" default="getAllOrders"/>
+
+    <element name="getOrderByIdParam" type="tns:getOrderByIdType"/>
+
+    <element name="getOrdersByItemIdParam" type="tns:getOrdersByItemIdType"/>
+
+    <element name="orderList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="orderInfo" type="tns:orderInfoType"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="orderInfo" type="tns:orderInfoType"/>
+
+    <complexType name="orderInfoType">
+        <sequence>
+            <element name="orderId" type="tns:orderIdType"/>
+            <element name="item" type="string"/>
+            <element name="numOfOrder" type="int" />
+            <element name="termOfDelivery" type="date"/>
+            <element name="comment" type="string" default=""/>
+            <element name="length" type="string" default=""/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getOrderByIdType">
+        <sequence>
+            <element name="orderId" type="tns:orderIdType"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getOrdersByItemIdType">
+        <sequence>
+            <element name="itemId" type="string"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="orderIdType">
+        <restriction base="string">
+            <length value="6"/>
+        </restriction>
+    </simpleType>
+
+
+</schema>

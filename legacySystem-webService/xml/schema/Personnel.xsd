@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/personnel"
+        xmlns:tns = "http://www.oldCompany.com/personnel"
+        elementFormDefault="qualified">
+
+
+    <!--  request  -->
+    <element name="getAllPersonnelInfosParam" type="string" fixed="getAllPersonnelInfos"/>
+    <element name="getPersonnelInfoByIdParam" type="tns:getPersonnelInfoByIdParamType"/>
+    <element name="getPersonnelInfoByNameParam" type="tns:getPersonnelInfoByNameParamType"/>
+    <element name="getPersonnelRoleByIdParam" type="tns:getPersonnelRoleByIdParamType"/>
+    <element name="getPersonnelRoleByNameParam" type="tns:getPersonnelRoleByNameParamType"/>
+    <!--  response  -->
+    <element name="personnelInfoList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="personnelInfo" type="tns:personnelInfoType"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="personnelInfo" type="tns:personnelInfoType"/>
+
+    <element name="personnelRole" type="tns:roleType"/>
+    <!--  type  -->
+    <complexType name="personnelInfoType">
+        <sequence>
+            <element name="id" type="int"/>
+            <element name="name" type="string"/>
+            <element name="role" type="tns:roleType"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="roleType">
+        <restriction base="string">
+            <enumeration value="员工"/>
+            <enumeration value="管理员"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="getPersonnelInfoByIdParamType">
+        <sequence>
+            <element name="personnelId" type="int"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getPersonnelInfoByNameParamType">
+        <sequence>
+            <element name="personnelName" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getPersonnelRoleByIdParamType">
+        <sequence>
+            <element name="personnelId" type="int"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getPersonnelRoleByNameParamType">
+        <sequence>
+            <element name="personnelName" type="string"/>
+        </sequence>
+    </complexType>
+
+</schema>

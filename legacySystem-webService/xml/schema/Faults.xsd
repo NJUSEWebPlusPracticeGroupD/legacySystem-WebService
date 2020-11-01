@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/fault"
+        xmlns:tns = "http://www.oldCompany.com/fault"
+        xmlns:order = "http://www.oldCompany.com/order"
+        elementFormDefault="qualified">
+
+    <import namespace="http://www.oldCompany.com/order" schemaLocation="OrderManage.xsd"/>
+
+    <element name="GroupDoesNotExistFault" type="tns:GroupDoesNotExistFaultType"/>
+    <element name="OrderDoesNotExistFault" type="tns:OrderDoesNotExistFaultType"/>
+    <element name="MaterielDoesNotExistFault" type="tns:MaterielDoesNotExistFaultType"/>
+    <element name="MachineDoesNotExistFault" type="tns:MachineDoesNotExistFaultType"/>
+    <element name="ItemDoesNotExistFault" type="tns:ItemDoesNotExistFaultType"/>
+    <element name="PersonnelDoesNotExistFault" type="tns:PersonnelDoesNotExistFaultType"/>
+
+    <complexType name="PersonnelDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This personnel does not exist."/>
+        </sequence>
+    </complexType>
+
+    <complexType name="GroupDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This group does not exist."/>
+        </sequence>
+    </complexType>
+
+    <complexType name="OrderDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This order does not exist."/>
+        </sequence>
+    </complexType>
+
+    <complexType name="MaterielDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This materiel does not exist."/>
+        </sequence>
+    </complexType>
+
+
+    <complexType name="MachineDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This machine does not exist."/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ItemDoesNotExistFaultType">
+        <sequence>
+            <element name="info" type="string" default="This item does not exist."/>
+        </sequence>
+    </complexType>
+
+</schema>

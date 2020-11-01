@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/erp"
+        xmlns:tns = "http://www.oldCompany.com/erp"
+        elementFormDefault="qualified">
+
+    <!--  request  -->
+    <element name="getAllGroupInfosParam" type="string" fixed="getAllGroupInfos"/>
+    <element name="getGroupInfoByIdParam" type="tns:getGroupInfoByIdParamType"/>
+    <element name="getGroupInfoByMemberNameParam" type="tns:getGroupInfoByMemberNameParamType"/>
+    <element name="getAllMachineInfosParam" type="string" fixed="getAllMachineInfos"/>
+    <element name="getMachineInfoByNameParam" type="tns:getMachineInfoByNameParamType"/>
+    <element name="getMachineInfosByTypeParam" type="tns:getMachineInfosByTypeParamType"/>
+    <element name="getAllItemInfosParam" type="string" fixed="getAllItemInfos"/>
+    <element name="getItemInfoByIdParam" type="tns:getItemInfoByIdParamType"/>
+    <!--  response  -->
+    <element name="ItemInfo" type="tns:ItemInfoType"/>
+    <element name="ItemInfoList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="ItemInfo" type="tns:ItemInfoType"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="GroupInfo" type="tns:GroupInformationType"/>
+    <element name="GroupInfoList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="GroupInfo" type="tns:GroupInformationType"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="MachineInfo" type="tns:MachineInfoType"/>
+    <element name="MachineInfoList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="MachineInfo" type="tns:MachineInfoType"/>
+            </sequence>
+        </complexType>
+    </element>
+    <!--  type  -->
+    <complexType name="GroupInformationType">
+        <sequence>
+            <element name="groupId" type="string"/>
+            <element name="groupName" type="string"/>
+            <element name="ability" type="int"/>
+        </sequence>
+    </complexType>
+    <complexType name="getGroupInfoByIdParamType">
+        <sequence>
+            <element type="string" name="groupId"/>
+        </sequence>
+    </complexType>
+    <complexType name="getGroupInfoByMemberNameParamType">
+        <sequence>
+            <element type="string" name="memberName"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="MachineInfoType">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="type" type="tns:machineType"/>
+            <element name="number" type="int"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="machineType">
+        <restriction base="string">
+            <enumeration value="line"/>
+            <enumeration value="equipment"/>
+        </restriction>
+    </simpleType>
+
+    <complexType  name="getMachineInfoByNameParamType" >
+        <sequence>
+            <element name="machineName" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType  name="getMachineInfosByTypeParamType" >
+        <sequence>
+            <element name="machineType" type="tns:machineType"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ItemInfoType">
+        <sequence>
+            <element name="itemId" type="string"/>
+            <element name="description" type="string"/>
+            <element name="property" type="tns:ItemPropertyType"/>
+            <element name="measurement" type="string"/>
+            <element name="color" type="string" default=""/>
+            <element name="length" type="string" default=""/>
+            <element name="hard" type="string" default=""/>
+            <element name="otherSpecification" type="string" default=""/>
+            <element name="prepareMode" type="tns:PrepareModeType"/>
+            <element name="MinimumPacking" type="int" default="1"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="getItemInfoByIdParamType">
+        <sequence>
+            <element name="itemId" type="string"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="ItemPropertyType">
+        <restriction base="string">
+            <enumeration value="成品"/>
+            <enumeration value="半成品"/>
+            <enumeration value="原材料"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="PrepareModeType">
+        <restriction base="string">
+            <enumeration value="自制"/>
+            <enumeration value="外购"/>
+        </restriction>
+    </simpleType>
+</schema>

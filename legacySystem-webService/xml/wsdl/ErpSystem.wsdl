@@ -1,0 +1,237 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace = "http://www.oldSystem.com/wsdl"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://www.oldSystem.com/wsdl"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:erp="http://www.oldCompany.com/erp"
+             xmlns:fault="http://www.oldCompany.com/fault">
+
+    <types>
+        <xs:schema targetNamespace="http://www.oldCompany.com/erp" xmlns:erp="http://www.oldCompany.com/erp">
+            <xs:include schemaLocation="../schema/ERP.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/fault" xmlns:fault="http://www.oldCompany.com/fault">
+            <xs:include schemaLocation="../schema/Faults.xsd"/>
+        </xs:schema>
+
+    </types>
+
+    <message name="getAllGroupInfos">
+        <part name="getAllGroupInfosParam" element="erp:getAllGroupInfosParam"/>
+    </message>
+    <message name="getAllGroupInfosResponse">
+        <part name="groupInfoList" element="erp:GroupInfoList"/>
+    </message>
+
+    <message name="getGroupInfoById">
+        <part name="getGroupInfoByIdParam" element="erp:getGroupInfoByIdParam"/>
+    </message>
+    <message name="getGroupInfoByIdResponse">
+        <part name="groupInfo" element="erp:GroupInfo"/>
+    </message>
+
+    <message name="GroupDoesNotExistFault">
+        <part name="GroupDoesNotExistFaultParam" element="fault:GroupDoesNotExistFault"/>
+    </message>
+
+    <message name="getGroupInfoByMemberName">
+        <part name="getGroupInfoByMemberNameParam" element="erp:getGroupInfoByMemberNameParam"/>
+    </message>
+    <message name="getGroupInfoByMemberNameResponse">
+        <part name="groupInfo" element="erp:GroupInfo"/>
+    </message>
+
+    <message name="getAllMachineInfos">
+        <part name="getAllMachineInfosParam" element="erp:getAllMachineInfosParam"/>
+    </message>
+    <message name="getAllMachineInfosResponse">
+        <part name="machineInfoList" element="erp:MachineInfoList"/>
+    </message>
+
+    <message name="getMachineInfoByName">
+        <part name="getMachineInfoByNameParam" element="erp:getMachineInfoByNameParam"/>
+    </message>
+    <message name="getMachineInfoByNameResponse">
+        <part name="machineInfo" element="erp:MachineInfo"/>
+    </message>
+
+    <message name="MachineDoesNotExistFault">
+        <part name="MachineDoesNotExistFaultParam" element="fault:MachineDoesNotExistFault"/>
+    </message>
+
+    <message name="getMachineInfosByType">
+        <part name="getMachineInfosByTypeParam" element="erp:getMachineInfosByTypeParam"/>
+    </message>
+    <message name="getMachineInfosByTypeResponse">
+        <part name="machineInfoList" element="erp:MachineInfoList"/>
+    </message>
+
+    <message name="getAllItemInfos">
+        <part name="getAllItemInfosParam" element="erp:getAllItemInfosParam"/>
+    </message>
+    <message name="getAllItemInfosResponse">
+        <part name="itemInfoList" element="erp:ItemInfoList"/>
+    </message>
+
+    <message name="getItemInfoById">
+        <part name="getItemInfoByIdParam" element="erp:getItemInfoByIdParam"/>
+    </message>
+    <message name="getItemInfoByIdResponse">
+        <part name="itemInfo" element="erp:ItemInfo"/>
+    </message>
+
+    <message name="ItemDoesNotExistFault">
+        <part name="ItemDoesNotExistFaultParam" element="fault:ItemDoesNotExistFault"/>
+    </message>
+
+    <portType name="ErpPort">
+
+        <operation name="getAllGroupInfos" >
+            <input message="tns:getAllGroupInfos" wsam:Action="erp/getAllGroupInfosRequest"/>
+            <output message="tns:getAllGroupInfosResponse" wsam:Action="erp/getAllGroupInfosResponse"/>
+        </operation>
+
+        <operation name="getGroupInfoById" >
+            <input message="tns:getGroupInfoById" wsam:Action="erp/getGroupInfoByIdRequest"/>
+            <output message="tns:getGroupInfoByIdResponse" wsam:Action="erp/getGroupInfoByIdResponse"/>
+            <fault name="GroupDoesNotExistFault" message="tns:GroupDoesNotExistFault" wsam:Action="erp/GroupDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getGroupInfoByMemberName" >
+            <input message="tns:getGroupInfoByMemberName" wsam:Action="erp/getGroupInfoByMemberNameRequest"/>
+            <output message="tns:getGroupInfoByMemberNameResponse" wsam:Action="erp/getGroupInfoByMemberNameResponse"/>
+            <fault name="GroupDoesNotExistFault" message="tns:GroupDoesNotExistFault" wsam:Action="erp/GroupDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getAllMachineInfos" >
+            <input message="tns:getAllMachineInfos" wsam:Action="erp/getAllMachineInfosRequest"/>
+            <output message="tns:getAllMachineInfosResponse" wsam:Action="erp/getAllMachineInfosResponse"/>
+        </operation>
+
+        <operation name="getMachineInfoByName" >
+            <input message="tns:getMachineInfoByName" wsam:Action="erp/getMachineInfoByNameRequest"/>
+            <output message="tns:getMachineInfoByNameResponse" wsam:Action="erp/getMachineInfoByNameResponse"/>
+            <fault name="MachineDoesNotExistFault" message="tns:MachineDoesNotExistFault" wsam:Action="erp/MachineDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getMachineInfosByType" >
+            <input message="tns:getMachineInfosByType" wsam:Action="erp/getMachineInfosByTypeRequest"/>
+            <output message="tns:getMachineInfosByTypeResponse" wsam:Action="erp/getMachineInfosByTypeResponse"/>
+        </operation>
+
+        <operation name="getAllItemInfos" >
+            <input message="tns:getAllItemInfos" wsam:Action="erp/getAllItemInfosRequest"/>
+            <output message="tns:getAllItemInfosResponse" wsam:Action="erp/getAllItemInfosResponse"/>
+        </operation>
+
+        <operation name="getItemInfoById" >
+            <input message="tns:getItemInfoById" wsam:Action="erp/getItemInfoByIdRequest"/>
+            <output message="tns:getItemInfoByIdResponse" wsam:Action="erp/getItemInfoByIdResponse"/>
+            <fault name="ItemDoesNotExistFault" message="tns:ItemDoesNotExistFault" wsam:Action="erp/ItemDoesNotExistFault"/>
+        </operation>
+
+    </portType>
+
+
+    <binding name="ErpBinding" type="tns:ErpPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getAllGroupInfos">
+            <soap:operation soapAction="erp/getAllGroupInfos"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getGroupInfoById">
+            <soap:operation soapAction="erp/getGroupInfoById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="GroupDoesNotExistFault">
+                <soap:fault name="GroupDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getGroupInfoByMemberName">
+            <soap:operation soapAction="erp/getGroupInfoByMemberName"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="GroupDoesNotExistFault">
+                <soap:fault name="GroupDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getAllMachineInfos">
+            <soap:operation soapAction="erp/getAllMachineInfos"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getMachineInfoByName">
+            <soap:operation soapAction="erp/getMachineInfoByName"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="MachineDoesNotExistFault">
+                <soap:fault name="MachineDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getMachineInfosByType">
+            <soap:operation soapAction="erp/getMachineInfosByType"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getAllItemInfos">
+            <soap:operation soapAction="erp/getAllItemInfos"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getItemInfoById">
+            <soap:operation soapAction="erp/getItemInfoById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="ItemDoesNotExistFault">
+                <soap:fault name="ItemDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+    </binding>
+    <service name="ErpService">
+        <port name="ErpPort" binding="tns:ErpBinding">
+            <soap:address location="http://localhost:8080/ws/erp" />
+        </port>
+    </service>
+</definitions>

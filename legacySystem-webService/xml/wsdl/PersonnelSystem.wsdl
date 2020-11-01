@@ -1,0 +1,166 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace = "http://www.oldSystem.com/wsdl"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://www.oldSystem.com/wsdl"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:personnel="http://www.oldCompany.com/personnel"
+             xmlns:fault="http://www.oldCompany.com/fault">
+
+    <types>
+        <xs:schema targetNamespace="http://www.oldCompany.com/personnel" xmlns:personnel="http://www.oldCompany.com/personnel">
+            <xs:include schemaLocation="../schema/Personnel.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/fault" xmlns:fault="http://www.oldCompany.com/fault">
+            <xs:include schemaLocation="../schema/Faults.xsd"/>
+        </xs:schema>
+
+    </types>
+
+    <message name="getAllPersonnelInfos">
+        <part name="getAllPersonnelInfosParam" element="personnel:getAllPersonnelInfosParam"/>
+    </message>
+    <message name="getAllPersonnelInfosResponse">
+        <part name="personnelInfoList" element="personnel:personnelInfoList"/>
+    </message>
+
+    <message name="getPersonnelInfoById">
+        <part name="getPersonnelInfoByIdParam" element="personnel:getPersonnelInfoByIdParam"/>
+    </message>
+    <message name="getPersonnelInfoByIdResponse">
+        <part name="personnelInfo" element="personnel:personnelInfo"/>
+    </message>
+
+    <message name="getPersonnelInfoByName">
+        <part name="getPersonnelInfoByNameParam" element="personnel:getPersonnelInfoByNameParam"/>
+    </message>
+    <message name="getPersonnelInfoByNameResponse">
+        <part name="personnelInfo" element="personnel:personnelInfo"/>
+    </message>
+
+    <message name="getPersonnelRoleById">
+        <part name="getPersonnelRoleByIdParam" element="personnel:getPersonnelRoleByIdParam"/>
+    </message>
+    <message name="getPersonnelRoleByIdResponse">
+        <part name="personnelRole" element="personnel:personnelRole"/>
+    </message>
+
+    <message name="getPersonnelRoleByName">
+        <part name="getPersonnelRoleByNameParam" element="personnel:getPersonnelRoleByNameParam"/>
+    </message>
+    <message name="getPersonnelRoleByNameResponse">
+        <part name="personnelRole" element="personnel:personnelRole"/>
+    </message>
+
+    <message name="PersonnelDoesNotExistFault">
+        <part name="PersonnelDoesNotExistFaultParam" element="fault:PersonnelDoesNotExistFault"/>
+    </message>
+
+
+
+    <portType name="PersonnelPort">
+
+        <operation name="getAllPersonnelInfos" >
+            <input message="tns:getAllPersonnelInfos" wsam:Action="personnel/getAllPersonnelInfosRequest"/>
+            <output message="tns:getAllPersonnelInfosResponse" wsam:Action="personnel/getAllPersonnelInfosResponse"/>
+        </operation>
+
+        <operation name="getPersonnelInfoById" >
+            <input message="tns:getPersonnelInfoById" wsam:Action="personnel/getPersonnelInfoByIdRequest"/>
+            <output message="tns:getPersonnelInfoByIdResponse" wsam:Action="personnel/getPersonnelInfoByIdResponse"/>
+            <fault name="PersonnelDoesNotExistFault" message="tns:PersonnelDoesNotExistFault" wsam:Action="personnel/PersonnelDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getPersonnelInfoByName" >
+            <input message="tns:getPersonnelInfoByName" wsam:Action="personnel/getPersonnelInfoByNameRequest"/>
+            <output message="tns:getPersonnelInfoByNameResponse" wsam:Action="personnel/getPersonnelInfoByNameResponse"/>
+            <fault name="PersonnelDoesNotExistFault" message="tns:PersonnelDoesNotExistFault" wsam:Action="personnel/PersonnelDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getPersonnelRoleById" >
+            <input message="tns:getPersonnelRoleById" wsam:Action="personnel/getPersonnelRoleByIdRequest"/>
+            <output message="tns:getPersonnelRoleByIdResponse" wsam:Action="personnel/getPersonnelRoleByIdResponse"/>
+            <fault name="PersonnelDoesNotExistFault" message="tns:PersonnelDoesNotExistFault" wsam:Action="personnel/PersonnelDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getPersonnelRoleByName" >
+            <input message="tns:getPersonnelRoleByName" wsam:Action="personnel/getPersonnelRoleByNameRequest"/>
+            <output message="tns:getPersonnelRoleByNameResponse" wsam:Action="personnel/getPersonnelRoleByNameResponse"/>
+            <fault name="PersonnelDoesNotExistFault" message="tns:PersonnelDoesNotExistFault" wsam:Action="personnel/PersonnelDoesNotExistFault"/>
+        </operation>
+
+    </portType>
+
+
+    <binding name="PersonnelBinding" type="tns:PersonnelPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getAllPersonnelInfos">
+            <soap:operation soapAction="personnel/getAllPersonnelInfos"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getPersonnelInfoById">
+            <soap:operation soapAction="personnel/getPersonnelInfoById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="PersonnelDoesNotExistFault">
+                <soap:fault name="PersonnelDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getPersonnelInfoByName">
+            <soap:operation soapAction="personnel/getPersonnelInfoByName"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="PersonnelDoesNotExistFault">
+                <soap:fault name="PersonnelDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getPersonnelRoleById">
+            <soap:operation soapAction="personnel/getPersonnelRoleById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="PersonnelDoesNotExistFault">
+                <soap:fault name="PersonnelDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="getPersonnelRoleByName">
+            <soap:operation soapAction="personnel/getPersonnelRoleByName"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="PersonnelDoesNotExistFault">
+                <soap:fault name="PersonnelDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+    <service name="PersonnelService">
+        <port name="PersonnelPort" binding="tns:PersonnelBinding">
+            <soap:address location="http://localhost:8080/ws/personnel" />
+        </port>
+    </service>
+</definitions>

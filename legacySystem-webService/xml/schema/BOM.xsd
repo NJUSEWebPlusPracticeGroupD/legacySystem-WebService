@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:tns="http://www.oldCompany.com/bom"
+        xmlns:erp="http://www.oldCompany.com/erp"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.oldCompany.com/bom"
+        elementFormDefault="qualified">
+    <import schemaLocation="ERP.xsd" namespace="http://www.oldCompany.com/erp"/>
+    <!--  request  -->
+    <element name="getAllBOMsParam" type="string" default="getAllBOMs"/>
+
+    <element name="getBOMByItemIdParam" type="tns:getBOMByItemIdParamType"/>
+    <!--  response  -->
+    <element name="BOMList">
+        <complexType>
+            <sequence minOccurs="0" maxOccurs="unbounded">
+                <element name="BOMInfo" type="tns:BOMType"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="BOMInfo" type="tns:BOMType"/>
+    <!--  type  -->
+
+
+    <complexType name="getBOMByItemIdParamType">
+        <sequence>
+            <element name="itemId" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="BOMType">
+        <sequence>
+            <element name="ItemId" type="string"/>
+            <element name="processList">
+                <complexType>
+                    <sequence minOccurs="1" maxOccurs="unbounded">
+                        <element type="tns:ProcessType" name="process"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+    </complexType>
+
+    <complexType name="ProcessType">
+        <sequence>
+            <element name="processName" type="string"/>
+<!--            工序所需物料-->
+            <element name="requiredMaterialInfoList">
+                <complexType>
+                    <sequence minOccurs="1" maxOccurs="unbounded">
+                        <element name="RequiredMaterialInfo" type="tns:requiredMaterialInfoType"/>
+                    </sequence>
+                </complexType>
+            </element>
+<!--            工序可选资源，人员(主资源)+机器(副资源)，（规定生产人员数+1机器数）*倍数-->
+            <element name="alternativeGroupInfoList">
+                <complexType>
+                    <sequence minOccurs="1" maxOccurs="unbounded">
+                        <element name="alternativeGroupInfo" type="tns:resourceInfoType"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="alternativeMachineInfoList">
+                <complexType>
+                    <sequence minOccurs="1" maxOccurs="unbounded">
+                        <element name="alternativeMachineInfo" type="tns:resourceInfoType"/>
+                    </sequence>
+                </complexType>
+            </element>
+<!--            产品规定生产人员-->
+            <element name="numOfPersonnel" type="int"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="requiredMaterialInfoType">
+        <sequence>
+            <element name="materialId" type="string"/>
+            <element name="materialProperty" type="erp:ItemPropertyType"/>
+            <element name="number" type="double"/>
+            <element name="unit" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="resourceInfoType">
+        <sequence>
+            <element name="resourceName" type="string"/>
+            <element name="resourceMode" type="string"/>
+            <element name="resourceType" type="tns:ResourceType"/>
+            <element name="leastNumOfResource" type="int"/>
+            <element name="standardCapacity" type="int"/>
+            <element name="priority" type="int"/>
+            <element name="timeOfChangeLine" type="double"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="ResourceType">
+        <restriction base="string">
+            <enumeration value="主资源"/>
+            <enumeration value="副资源"/>
+        </restriction>
+    </simpleType>
+</schema>

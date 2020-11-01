@@ -1,0 +1,122 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace = "http://www.oldSystem.com/wsdl"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://www.oldSystem.com/wsdl"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:order="http://www.oldCompany.com/order"
+             xmlns:fault="http://www.oldCompany.com/fault">
+
+    <types>
+        <xs:schema targetNamespace="http://www.oldCompany.com/order" xmlns:order="http://www.oldCompany.com/order">
+            <xs:include schemaLocation="../schema/OrderManage.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/fault" xmlns:fault="http://www.oldCompany.com/fault">
+            <xs:include schemaLocation="../schema/Faults.xsd"/>
+        </xs:schema>
+
+    </types>
+
+    <message name="getAllOrders">
+        <part name="getAllOrdersParam" element="order:getAllOrdersParam"/>
+    </message>
+
+    <message name="getAllOrdersResponse">
+        <part name="orderList" element="order:orderList"/>
+    </message>
+
+    <message name="getOrderById">
+        <part name="getOrderByIdParam" element="order:getOrderByIdParam"/>
+    </message>
+
+    <message name="getOrderByIdResponse">
+        <part name="orderInfo" element="order:orderInfo"/>
+    </message>
+
+    <message name="OrderDoesNotExistFault">
+        <part name="OrderDoesNotExistFaultParam" element="fault:OrderDoesNotExistFault"/>
+    </message>
+
+    <message name="getOrdersByMaterielId">
+        <part name="getOrdersByMaterielIdParam" element="order:getOrdersByItemIdParam"/>
+    </message>
+
+    <message name="getOrdersByMaterielIdResponse">
+        <part name="orderList" element="order:orderList"/>
+    </message>
+
+    <message name="ItemDoesNotExistFault">
+        <part name="ItemDoesNotExistFaultParam" element="fault:ItemDoesNotExistFault"/>
+    </message>
+
+
+    <portType name="OrderPort">
+
+        <operation name="getAllOrders" >
+            <input message="tns:getAllOrders" wsam:Action="order/getAllOrdersRequest"/>
+            <output message="tns:getAllOrdersResponse" wsam:Action="order/getAllOrdersResponse"/>
+        </operation>
+
+        <operation name="getOrderById" >
+            <input message="tns:getOrderById" wsam:Action="order/getOrderByIdRequest"/>
+            <output message="tns:getOrderByIdResponse" wsam:Action="order/getOrderByIdResponse"/>
+            <fault name="OrderDoesNotExistFault" message="tns:OrderDoesNotExistFault" wsam:Action="order/OrderDoesNotExistFault"/>
+        </operation>
+
+        <operation name="getOrdersByItemId" >
+            <input message="tns:getOrdersByMaterielId" wsam:Action="order/getOrdersByMaterielIdRequest"/>
+            <output message="tns:getOrdersByMaterielIdResponse" wsam:Action="order/getOrdersByMaterielIdResponse"/>
+            <fault name="ItemDoesNotExistFault" message="tns:ItemDoesNotExistFault" wsam:Action="order/ItemDoesNotExistFault"/>
+        </operation>
+
+    </portType>
+
+
+    <binding name="OrderBinding" type="tns:OrderPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getAllOrders">
+            <soap:operation soapAction="order/getAllOrders"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+
+        </operation>
+
+        <operation name="getOrderById">
+            <soap:operation soapAction="order/getOrderById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="OrderDoesNotExistFault">
+                <soap:fault name="OrderDoesNotExistFault" use="literal" />
+            </fault>
+
+        </operation>
+
+        <operation name="getOrdersByItemId">
+            <soap:operation soapAction="order/getOrdersByMaterielId"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="ItemDoesNotExistFault">
+                <soap:fault name="ItemDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+    <service name="OrderService">
+        <port name="OrderPort" binding="tns:OrderBinding">
+            <soap:address location="http://localhost:8080/ws/order" />
+        </port>
+    </service>
+</definitions>

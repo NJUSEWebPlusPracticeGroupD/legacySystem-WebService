@@ -1,0 +1,111 @@
+<definitions  xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace = "http://www.oldSystem.com/wsdl"
+             xmlns:tns="http://www.oldSystem.com/wsdl"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:attendance="http://www.oldCompany.com/attendance"
+             xmlns:erp="http://www.oldCompany.com/erp"
+             xmlns:fault="http://www.oldCompany.com/fault">
+
+    <types>
+        <xs:schema targetNamespace="http://www.oldCompany.com/attendance" xmlns:attendance="http://www.oldCompany.com/attendance">
+            <xs:include schemaLocation="../schema/Attendance.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/erp" xmlns:erp="http://www.oldCompany.com/erp">
+            <xs:include schemaLocation="../schema/ERP.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/fault" xmlns:fault="http://www.oldCompany.com/fault">
+            <xs:include schemaLocation="../schema/Faults.xsd"/>
+        </xs:schema>
+
+    </types>
+
+    <message name="getAllGroupSchedules">
+        <part name="getAllGroupSchedulesParam" element="attendance:getAllGroupScheduleParam"/>
+    </message>
+    <message name="getAllGroupSchedulesResponse">
+        <part name="groupScheduleInfoList" element="attendance:GroupScheduleInformationList"/>
+    </message>
+
+    <message name="getGroupScheduleById">
+        <part name="getGroupScheduleByIdParam" element="attendance:getGroupScheduleParam"/>
+    </message>
+    <message name="getGroupScheduleByIdResponse">
+        <part name="groupScheduleInfo" element="attendance:GroupSchedulingInformation"/>
+    </message>
+    <message name="GroupDoesNotExistFault">
+        <part name="GroupDoesNotExistFaultParam" element="fault:GroupDoesNotExistFault"/>
+    </message>
+
+    <message name="getAllShifts">
+        <part name="getAllShiftsParam" element="attendance:getAllShiftsParam"/>
+    </message>
+    <message name="getAllShiftsResponse">
+        <part name="shiftList" element="attendance:shiftList"/>
+    </message>
+
+
+    <portType name="AttendancePort">
+        <operation name="getAllGroupSchedules" >
+            <input message="tns:getAllGroupSchedules" wsam:Action="attendance/getAllGroupSchedulesRequest"/>
+            <output message="tns:getAllGroupSchedulesResponse" wsam:Action="attendance/getAllGroupSchedulesResponse"/>
+        </operation>
+        <operation name="getGroupScheduleById" >
+            <input message="tns:getGroupScheduleById" wsam:Action="attendance/getGroupScheduleByIdRequest"/>
+            <output message="tns:getGroupScheduleByIdResponse" wsam:Action="attendance/getGroupScheduleByIdResponse"/>
+            <fault name="GroupDoesNotExistFault" message="tns:GroupDoesNotExistFault" wsam:Action="attendance/GroupDoesNotExistFault"/>
+        </operation>
+        <operation name="getAllShifts">
+            <input message="tns:getAllShifts" wsam:Action="attendance/getAllShiftsRequest"/>
+            <output message="tns:getAllShiftsResponse" wsam:Action="attendance/getAllShiftsResponse"/>
+        </operation>
+    </portType>
+
+
+    <binding name="AttendanceBinding" type="tns:AttendancePort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getAllGroupSchedules">
+            <soap:operation soapAction="attendance/getAllGroupSchedules"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+
+        </operation>
+
+        <operation name="getGroupScheduleById">
+            <soap:operation soapAction="attendance/gelGroupScheduleById"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="GroupDoesNotExistFault">
+                <soap:fault name="GroupDoesNotExistFault" use="literal" />
+            </fault>
+
+        </operation>
+
+        <operation name="getAllShifts">
+            <soap:operation soapAction="attendance/getAllShifts"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+
+        </operation>
+
+    </binding>
+    <service name="AttendanceService">
+        <port name="AttendancePort" binding="tns:AttendanceBinding">
+            <soap:address location="http://localhost:8080/ws/attendance" />
+        </port>
+    </service>
+</definitions>

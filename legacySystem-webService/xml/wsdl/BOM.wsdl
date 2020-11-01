@@ -1,0 +1,89 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace = "http://www.oldSystem.com/wsdl"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://www.oldSystem.com/wsdl"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:bom="http://www.oldCompany.com/bom"
+             xmlns:fault="http://www.oldCompany.com/fault">
+
+    <types>
+        <xs:schema targetNamespace="http://www.oldCompany.com/bom" xmlns:bom="http://www.oldCompany.com/bom">
+            <xs:include schemaLocation="../schema/BOM.xsd"/>
+        </xs:schema>
+        <xs:schema targetNamespace="http://www.oldCompany.com/fault" xmlns:fault="http://www.oldCompany.com/fault">
+            <xs:include schemaLocation="../schema/Faults.xsd"/>
+        </xs:schema>
+
+    </types>
+
+    <message name="getAllBOMs">
+        <part name="getAllBOMsParam" element="bom:getAllBOMsParam"/>
+    </message>
+    <message name="getAllBOMsResponse">
+        <part name="BOMInfoList" element="bom:BOMList"/>
+    </message>
+
+    <message name="getBOMByItemId">
+        <part name="getBOMByItemIdParam" element="bom:getBOMByItemIdParam"/>
+    </message>
+    <message name="getBOMByItemIdResponse">
+        <part name="BOMInfo" element="bom:BOMInfo"/>
+    </message>
+
+    <message name="ItemDoesNotExistFault">
+        <part name="ItemDoesNotExistFaultParam" element="fault:ItemDoesNotExistFault"/>
+    </message>
+
+
+
+
+    <portType name="BOMPort">
+
+        <operation name="getAllBOMs" >
+            <input message="tns:getAllBOMs" wsam:Action="bom/getAllBOMsRequest"/>
+            <output message="tns:getAllBOMsResponse" wsam:Action="bom/getAllBOMsResponse"/>
+        </operation>
+
+        <operation name="getBOMByItemId" >
+            <input message="tns:getBOMByItemId" wsam:Action="bom/getBOMByItemIdRequest"/>
+            <output message="tns:getBOMByItemIdResponse" wsam:Action="bom/getBOMByItemIdResponse"/>
+            <fault name="ItemDoesNotExistFault" message="tns:ItemDoesNotExistFault" wsam:Action="bom/ItemDoesNotExistFault"/>
+        </operation>
+
+    </portType>
+
+
+    <binding name="BOMBinding" type="tns:BOMPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getAllBOMs">
+            <soap:operation soapAction="bom/getAllBOMs"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="getBOMByItemId">
+            <soap:operation soapAction="bom/getBOMByItemId"/>
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="ItemDoesNotExistFault">
+                <soap:fault name="ItemDoesNotExistFault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+    <service name="BOMService">
+        <port name="BOMPort" binding="tns:BOMBinding">
+            <soap:address location="http://localhost:8080/ws/bom" />
+        </port>
+    </service>
+</definitions>
