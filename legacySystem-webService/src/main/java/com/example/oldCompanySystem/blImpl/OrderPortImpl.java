@@ -46,6 +46,12 @@ public class OrderPortImpl implements OrderPort {
            setOrderInfo(orderInfoType,properties);
            orderInfoTypes.add(orderInfoType);
        }
+       res.setOrderInfoTypes(new OrderInfoType[orderInfoTypes.size()]);
+       int i=0;
+       for(OrderInfoType o:orderInfoTypes){
+           res.getOrderInfoTypes()[i] = o;
+           i++;
+       }
        System.out.println(res.getOrderInfo().size());
         return res;
     }
@@ -137,7 +143,7 @@ public class OrderPortImpl implements OrderPort {
         }
 
         orderInfoType.setTermOfDelivery(gc);
-        orderInfoType.setComment(properties[4]);
-        orderInfoType.setLength(properties[5]);
+//        orderInfoType.setComment(properties[4]);
+//        orderInfoType.setLength(properties[5]);
     }
 }

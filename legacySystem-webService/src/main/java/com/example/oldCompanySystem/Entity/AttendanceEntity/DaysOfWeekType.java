@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.*;
 public class DaysOfWeekType {
 
     @XmlElement(required = true)
-    @XmlSchemaType(name = "string")
+    @XmlSchemaType(name = "string",namespace = "http://www.oldCompany.com/attendance")
     protected WeekDayType startDay;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "string")
+    @XmlSchemaType(name = "string",namespace = "http://www.oldCompany.com/attendance")
     protected WeekDayType endDay;
 
     /**

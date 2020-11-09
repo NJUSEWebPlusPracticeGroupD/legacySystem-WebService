@@ -1,6 +1,5 @@
 
 package com.example.oldCompanySystem.Entity.OrderEntity;
-
 import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -40,17 +39,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class OrderInfoType {
 
-    @XmlElement(required = true)
+    @XmlElement(required = true,namespace = "")
     protected String orderId;
-    @XmlElement(required = true)
+    @XmlElement(required = true,namespace = "")
     protected String item;
+    @XmlElement(required = true,namespace = "")
     protected int numOfOrder;
-    @XmlElement(required = true)
+    @XmlElement(required = true,namespace = "")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar termOfDelivery;
-    @XmlElement(required = true, defaultValue = "")
+    @XmlElement(required = true, defaultValue = "",namespace = "")
     protected String comment;
-    @XmlElement(required = true, defaultValue = "")
+    @XmlElement(required = true, defaultValue = "",namespace = "")
     protected String length;
 
     /**

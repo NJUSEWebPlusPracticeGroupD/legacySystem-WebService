@@ -28,6 +28,7 @@ public class AttendancePortImpl implements AttendancePort {
 
     @Override
     public GroupScheduleInformationList getAllGroupSchedules(String getAllGroupSchedulesParam) {
+        System.out.println("SDasdsad");
         GroupScheduleInformationList res = new GroupScheduleInformationList();
         List<GroupScheduleInformationType>  groupScheduleInformationTypes = new ArrayList<>();
         res.setGroupScheduleInformation(groupScheduleInformationTypes);

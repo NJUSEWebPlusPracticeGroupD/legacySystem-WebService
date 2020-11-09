@@ -27,18 +27,30 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "orderInfo"
+    "orderInfo",
+        "orderInfoTypes"
 })
 @XmlRootElement(name = "orderList", namespace = "http://www.oldCompany.com/order")
 public class OrderList {
+
 
     public void setOrderInfo(List<OrderInfoType> orderInfo) {
         this.orderInfo = orderInfo;
     }
 
-    @XmlElement(namespace = "http://www.oldCompany.com/order")
+
     protected List<OrderInfoType> orderInfo;
 
+    @XmlElement(namespace = "http://www.oldCompany.com/order",required = true)
+    protected OrderInfoType[] orderInfoTypes;
+
+    public OrderInfoType[] getOrderInfoTypes() {
+        return orderInfoTypes;
+    }
+
+    public void setOrderInfoTypes(OrderInfoType[] orderInfoTypes) {
+        this.orderInfoTypes = orderInfoTypes;
+    }
     /**
      * Gets the value of the orderInfo property.
      * 
