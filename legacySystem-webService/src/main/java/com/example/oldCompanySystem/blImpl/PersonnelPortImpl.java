@@ -20,7 +20,7 @@ public class PersonnelPortImpl implements PersonnelPort {
         System.setProperty(StaxUtils.ALLOW_INSECURE_PARSER, "true");
     }
 
-    public static ArrayList<String> fileLines = new CsvReader("csv\\人员.csv").readCsv();
+    public static ArrayList<String> fileLines = new CsvReader("csv/人员.csv").readCsv();
 
     @Override
     public PersonnelInfoList getAllPersonnelInfos(String getAllPersonnelInfosParam) {

@@ -27,8 +27,8 @@ public class OrderPortImpl implements OrderPort {
         System.setProperty(StaxUtils.ALLOW_INSECURE_PARSER, "true");
     }
 
-    public static ArrayList<String> fileLines = new CsvReader("csv\\订单信息.csv").readCsv();
-    public  static ArrayList<String> itemLines = new CsvReader("csv\\物品信息.csv").readCsv();
+    public static ArrayList<String> fileLines = new CsvReader("csv/订单信息.csv").readCsv();
+    public  static ArrayList<String> itemLines = new CsvReader("csv/物品信息.csv").readCsv();
     @Override
     public OrderList getAllOrders(String getAllOrdersParam) {
         OrderList res = new OrderList();

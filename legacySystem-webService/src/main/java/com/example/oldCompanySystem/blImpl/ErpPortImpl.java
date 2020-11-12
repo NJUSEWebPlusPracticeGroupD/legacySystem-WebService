@@ -19,8 +19,8 @@ public class ErpPortImpl implements ErpPort {
         System.setProperty(StaxUtils.ALLOW_INSECURE_PARSER, "true");
     }
 
-    public static ArrayList<String> resourceLines = new CsvReader("csv\\资源.csv").readCsv();
-    public static ArrayList<String> itemLines = new CsvReader("csv\\物品信息.csv").readCsv();
+    public static ArrayList<String> resourceLines = new CsvReader("csv/资源.csv").readCsv();
+    public static ArrayList<String> itemLines = new CsvReader("csv/物品信息.csv").readCsv();
 
     @Override
     public GroupInfoList getAllGroupInfos(String getAllGroupInfosParam) {
