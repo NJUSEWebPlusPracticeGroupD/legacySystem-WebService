@@ -22,9 +22,9 @@ public class AttendancePortImpl implements AttendancePort {
         System.setProperty(StaxUtils.ALLOW_INSECURE_PARSER, "true");
     }
 
-    public static ArrayList<String> fileLines = new CsvReader("csv\\日历.csv").readCsv();
-    public static ArrayList<String> resourceLines = new CsvReader("csv\\资源.csv").readCsv();
-    public static ArrayList<String> scheduleLines = new CsvReader("csv\\班次.csv").readCsv();
+    public static ArrayList<String> fileLines = new CsvReader("csv/日历.csv").readCsv();
+    public static ArrayList<String> resourceLines = new CsvReader("csv/资源.csv").readCsv();
+    public static ArrayList<String> scheduleLines = new CsvReader("csv/班次.csv").readCsv();
 
     @Override
     public GroupScheduleInformationList getAllGroupSchedules(String getAllGroupSchedulesParam) {
