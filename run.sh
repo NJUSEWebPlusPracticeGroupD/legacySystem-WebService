@@ -4,6 +4,7 @@ APP_DIR="legacySystem-webService"
 PROCESS_NAME=oldCompanySystem-0.0.1-SNAPSHOT.jar
 kill -9 $(ps -eaf|grep -i "java .*${PROCESS_NAME}"|grep -v 'grep'|awk '{print $2}')
 echo "Closing $PROCESS_NAME"
+rm $APP_DIR/$PROCESS_NAME
 git pull
 cd ${APP_DIR}
 mvn clean package -Dmaven.test.skip=true
