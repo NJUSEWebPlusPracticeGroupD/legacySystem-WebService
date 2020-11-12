@@ -9,5 +9,5 @@ git pull
 cd ${APP_DIR}
 mvn clean package -Dmaven.test.skip=true
 cp target/$PROCESS_NAME $PROCESS_NAME
-nohup java -jar $PROCESS_NAME 2> out.log
+nohup java -jar $PROCESS_NAME 2> out.log &
 echo "${PROCESS_NAME} Started"
