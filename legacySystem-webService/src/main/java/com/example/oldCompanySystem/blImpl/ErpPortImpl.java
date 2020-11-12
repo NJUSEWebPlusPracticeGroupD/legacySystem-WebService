@@ -211,7 +211,8 @@ public class ErpPortImpl implements ErpPort {
     private void setMachineProperties(MachineInfoType m, String[] properties){
         m.setName(properties[1]);
         if(properties[1].contains("line")){
-            m.setNumber(Integer.parseInt(properties[1].substring(properties[1].indexOf("line")+4)));
+            // 【fix】设置为资源量（同一型号有几个）
+            m.setNumber(Integer.parseInt(properties[5]));
             m.setType(MachineType.LINE);
         }
         else{
